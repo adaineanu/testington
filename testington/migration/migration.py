@@ -23,7 +23,7 @@ if __name__ == '__main__':
             cursor.execute(sql.SQL('''
                 DROP TABLE testington;'''))
         except psycopg2.ProgrammingError:
-            pass
+            database.rollback()
         try:
             cursor.execute(sql.SQL('''
                 CREATE TABLE testington(
@@ -34,4 +34,4 @@ if __name__ == '__main__':
             cursor.execute(sql.SQL('''CREATE INDEX idx_email ON testington USING btree(email)'''))
             database.commit()
         except psycopg2.ProgrammingError:
-            pass
+            database.rollback()
