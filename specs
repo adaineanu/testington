@@ -1,0 +1,18 @@
+1. Create a github and a docker hub repository
+2. Build a basic web app using python 3 & flask, which runs on port 8080 and serves GET & POST requests on a single endpoint: /api/test 
+(http://localhost:8080/api/test)
+3. A GET request will retrieve the first 10 rows from the "testington" table.
+4. A POST request will write a new row to the "testington" table.
+5. "testington" is a a table in the postgres database used by the web app with the following fields:
+	- id (primary key)
+	- created_at (datetime)
+	- message (char[255])
+	- email (char[100]) - Indexed, type B-Tree
+6. package everything into a docker image and push it to the dockerhub repository with the tag "final".
+7. when the docker image is pulled and ran into a container, it should:
+	- use the latest public postgres image to run a postgres database
+	- run a migration on the database to create the "testington" table
+	- start the web app in a gunicorn container
+	- bind the internal web app port 8080 to the external 8080 port on the machine running the docker container
+8. BONUS POINTS (not mandatory): take it one step further and use docker compose to declare and run 2 separate containers: one for the web app and one for the database.
+
